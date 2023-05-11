@@ -5,7 +5,6 @@ public class earthGenerator : MonoBehaviour
 {
 
     public GameObject image;
-    public GameObject UIparent;
     public GameObject parent;
     public int[][] mapArr = new int[100][];
 
@@ -36,13 +35,12 @@ public class earthGenerator : MonoBehaviour
             }
         }
 
-        GetComponent<drawGrid>().lateStart(UIparent, image);
+        GetComponent<drawGrid>().drawMap();
     }
 
 
 
     int size = 0;
-    int help = 0;
     public void genMap(int x, int z)
     {
 
