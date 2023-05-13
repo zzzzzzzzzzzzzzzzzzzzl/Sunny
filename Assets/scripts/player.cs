@@ -57,12 +57,12 @@ public class player : MonoBehaviour
     {
         quitActions();
         playerObj.transform.rotation = Quaternion.Euler(0f, rotation, 0f);
-        if (GetComponent<earthGenerator>().mapArr[arr[0] + (int)playerObj.transform.position.x][arr[1] + (int)playerObj.transform.position.z] == 1)
+        if (GetComponent<earthGenerator>().tileArr[arr[0] + (int)playerObj.transform.position.x][arr[1] + (int)playerObj.transform.position.z].walkable == true)
         {
             playerObj.transform.position += new Vector3(arr[0], 0, arr[1]);
         }
 
-        facing = (GetComponent<earthGenerator>().mapArr[arr[0] + (int)playerObj.transform.position.x][arr[1] + (int)playerObj.transform.position.z] == 1);
+        facing = (GetComponent<earthGenerator>().tileArr[arr[0] + (int)playerObj.transform.position.x][arr[1] + (int)playerObj.transform.position.z].walkable == true);
         return;
     }
 }

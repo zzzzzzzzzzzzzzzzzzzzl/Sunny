@@ -43,7 +43,7 @@ public class drawGrid : MonoBehaviour
     public void drawMap()
     {
         // create a new texture for the map with the same dimensions as the map array
-        int[][] arr = GetComponent<earthGenerator>().mapArr;
+        tile[][] arr = GetComponent<earthGenerator>().tileArr;
         mapTexture = new Texture2D(arr.Length, arr[0].Length);
 
         // set each pixel in the texture based on the value in the map array
@@ -51,13 +51,18 @@ public class drawGrid : MonoBehaviour
         {
             for (int j = 0; j < arr[i].Length; j++)
             {
-                if (arr[i][j] == 1)
+                if (arr[i][j].type == "dirt")
                 {
-                    mapTexture.SetPixel(i, j, new Color(Random.Range(0f, .3f), Random.Range(.0f, .6f) + .4f, Random.Range(.0f, .3f) + .1f));
+                    mapTexture.SetPixel(i, j, new Color(Random.Range(0f, .3f), Random.Range(.0f, .2f) + .6f, Random.Range(.0f, .2f) + .1f));
                 }
-                else
+                if (arr[i][j].type == "water")
                 {
-                    mapTexture.SetPixel(i, j, Color.white);
+                    mapTexture.SetPixel(i, j, new Color(Random.Range(0f, .1f), Random.Range(.0f, .1f) + .3f, Random.Range(.0f, .1f) + .5f));
+                }
+                if (arr[i][j].player == true)
+                {
+                    mapTexture.SetPixel(i, j, new Color(Random.Range(0f, .2f) + .7f, Random.Range(.0f, .1f) + .5f, Random.Range(.0f, .1f) + .5f));
+
                 }
             }
         }

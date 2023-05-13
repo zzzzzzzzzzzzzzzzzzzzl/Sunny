@@ -5,6 +5,7 @@ using UnityEngine;
 public class functionsUI : MonoBehaviour
 {
     public GameObject UI;
+    public string open = "none";
 
     public void toggleUI()
     {

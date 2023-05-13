@@ -6,14 +6,23 @@ public class earthGenerator : MonoBehaviour
 
     public GameObject image;
     public GameObject parent;
-    public int[][] mapArr = new int[100][];
+    public GameObject player;
+    // public int[][] tileArr = new int[100][];
+    public tile[][] tileArr = new tile[100][];
 
 
     public void Start()
     {
         for (int i = 0; i < 100; i++)
         {
-            mapArr[i] = new int[100];
+            tileArr[i] = new tile[100];
+            for (int j = 0; j < 100; j++)
+            {
+                GameObject plane = newPlane();
+                plane.transform.position = new Vector3(i, 0, j);
+                plane.transform.parent = parent.transform;
+                tileArr[i][j] = new tile("water", plane);
+            }
         }
         genMap(50, 50);
         genMap(50, 50);
@@ -21,12 +30,12 @@ public class earthGenerator : MonoBehaviour
         genMap(50, 50);
         genMap(50, 50);
         genMap(50, 50);
-        for (int i = 0; i < mapArr.Length; i++)
+        for (int i = 0; i < tileArr.Length; i++)
         {
-            for (int j = 0; j < mapArr[i].Length; j++)
+            for (int j = 0; j < tileArr[i].Length; j++)
             {
 
-                if (mapArr[i][j] == 1)
+                if (tileArr[i][j].type == "dirt")
                 {
                     GameObject plane = newPlane();
                     plane.transform.position = new Vector3(i, 0, j);
@@ -35,6 +44,7 @@ public class earthGenerator : MonoBehaviour
             }
         }
 
+        tileArr[(int)player.transform.position.x][(int)player.transform.position.z].player = true;
         GetComponent<drawGrid>().drawMap();
     }
 
@@ -59,14 +69,20 @@ public class earthGenerator : MonoBehaviour
             if (0 == Random.Range(0, 0))
             {
                 int[] addToMap = arr[Random.Range(0, 4)];
-                if (mapArr[addToMap[0]][addToMap[1]] == 1)
+                if (!(tileArr[addToMap[0]][addToMap[1]].type == "dirt"))
                 {
+                    size++;
+                    tileArr[addToMap[0]][addToMap[1]].type = "dirt";
+
+                    GameObject plane = newPlane();
+                    plane.transform.position = new Vector3(addToMap[0], 0, addToMap[1]);
+                    plane.transform.parent = parent.transform;
+
+                    tileArr[addToMap[0]][addToMap[1]] = new tile("dirt", plane);
+                    genMap(addToMap[0], addToMap[1]);
                 }
                 else
                 {
-                    size++;
-                    mapArr[addToMap[0]][addToMap[1]] = 1;
-                    genMap(addToMap[0], addToMap[1]);
                 }
 
 

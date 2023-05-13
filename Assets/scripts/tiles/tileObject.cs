@@ -7,22 +7,34 @@ public class tile
 {
 
 
-    private string type;
-    public tile(Tuple<string> tileType)
-    {
+    public string type;
+    public bool walkable;
+    public bool fishable;
+    public bool player;
+    public GameObject mesh;
 
-        // type = tileType;
+    public tile(string Type, GameObject Mesh)
+    {
+        mesh = Mesh;
+        Tuple<string, bool, bool, bool, GameObject> typeData = tileDictionary.tileData[Type];
+        type = typeData.Item1;
+        walkable = typeData.Item2;
+        fishable = typeData.Item3;
     }
 }
-// public class tileInit : MonoBehaviour
-// {
-//     public Dictionary<string, Tuple<string>> tilePrefabs;
-//     private void Awake()
-//     {
+public class tileDictionary : MonoBehaviour
+{
+    //we should put our game object templates here
 
-//         tilePrefabs = new Dictionary<string, Tuple<string>>();
-//         Debug.Log(tilePrefabs["grass"]);
-//     }
-// }
+    //Tuple<string,bool,bool,bool>
+    //Tuple<type,walkable,fishable,player>
+    public static Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> tileData =
+     new Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> {
+        { "dirt", new Tuple<string, bool, bool,bool,GameObject>("dirt", true, false,false,new GameObject()) },
+        { "water", new Tuple<string, bool, bool,bool,GameObject>("water", false, true,false,new GameObject()) }
+      };
+}
+
+
 
 
