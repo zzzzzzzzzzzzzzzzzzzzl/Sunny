@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class playerCharacter : MonoBehaviour
 {
-    public int[] facing = new int[] { };
+    public int[] position = new int[] { };
+    public List<item> test = new List<item>();
+
+
 
 
 }

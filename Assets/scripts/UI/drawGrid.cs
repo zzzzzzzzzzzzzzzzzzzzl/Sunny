@@ -74,4 +74,8 @@ public class drawGrid : MonoBehaviour
         parent.GetComponent<Image>().sprite = sprite;
         parent.transform.localScale = new Vector3(pixelSize, pixelSize, 1);
     }
+    public void updateMap()
+    {
+
+    }
 }

@@ -27,16 +27,14 @@ public class gameControls : MonoBehaviour
             int[] arr = { -1, 0 };
             GetComponent<playerActions>().movePlayer(arr, 270f);
         }
-
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            GetComponent<drawGrid>().drawMap();
-            GetComponent<functionsUI>().toggleUI();
-        }
         if (Input.GetKeyUp(KeyCode.M))
         {
             GetComponent<drawGrid>().drawMap();
-            GetComponent<functionsUI>().toggleUI();
+            GetComponent<functionsUI>().toggleUI("mapUI");
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            GetComponent<functionsUI>().toggleUI("inventoryUI");
         }
     }
 }

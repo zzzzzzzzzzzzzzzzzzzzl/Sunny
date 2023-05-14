@@ -4,12 +4,32 @@ using UnityEngine;
 
 public class functionsUI : MonoBehaviour
 {
-    public GameObject UI;
-    public string open = "none";
+    public GameObject mapUI;
+    public GameObject inventoryUI;
+    private string open = "none";
+    public Dictionary<string, GameObject> UIDict = new Dictionary<string, GameObject>();
 
-    public void toggleUI()
+    private void Start()
     {
-        GetComponent<drawGrid>().drawMap();
-        UI.SetActive(!UI.activeSelf);
+        UIDict.Add("mapUI", mapUI);
+        UIDict.Add("inventoryUI", inventoryUI);
+    }
+
+    public void toggleUI(string openUI)
+    {
+        open = openUI;
+        foreach (string key in UIDict.Keys)
+        {
+            Debug.Log(key);
+            if (open == key)
+            {
+                UIDict[key].SetActive(!UIDict[key].activeSelf);
+            }
+            else
+            {
+                UIDict[key].SetActive(false);
+            }
+
+        }
     }
 }

@@ -16,6 +16,8 @@ public class tile
     public tile(string Type, GameObject Mesh)
     {
         mesh = Mesh;
+        type = Type;
+        mesh.GetComponent<Renderer>().material = (Material)Resources.Load($"{type}");
         Tuple<string, bool, bool, bool, GameObject> typeData = tileDictionary.tileData[Type];
         type = typeData.Item1;
         walkable = typeData.Item2;
@@ -28,10 +30,12 @@ public class tileDictionary : MonoBehaviour
 
     //Tuple<string,bool,bool,bool>
     //Tuple<type,walkable,fishable,player>
+
+
     public static Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> tileData =
      new Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> {
-        { "dirt", new Tuple<string, bool, bool,bool,GameObject>("dirt", true, false,false,new GameObject()) },
-        { "water", new Tuple<string, bool, bool,bool,GameObject>("water", false, true,false,new GameObject()) }
+        { "dirt", new Tuple<string, bool, bool,bool,GameObject>("dirt", true, false,false,null) },
+        { "water", new Tuple<string, bool, bool,bool,GameObject>("water", false, true,false,null) }
       };
 }
 
