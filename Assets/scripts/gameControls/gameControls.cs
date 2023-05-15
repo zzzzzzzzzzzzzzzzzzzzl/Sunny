@@ -34,6 +34,7 @@ public class gameControls : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.E))
         {
+            GetComponent<playerInventoryUI>().loadInventoryUI();
             GetComponent<functionsUI>().toggleUI("inventoryUI");
         }
     }

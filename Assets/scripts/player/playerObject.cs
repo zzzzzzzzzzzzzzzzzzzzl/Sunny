@@ -5,8 +5,6 @@ using UnityEngine;
 public class playerObject : MonoBehaviour
 {
     public Inventory inventory = new Inventory(30);
-    public List<item> test = new List<item>();
-
     public void Start()
     {
         Debug.Log("player has itmes good job");
