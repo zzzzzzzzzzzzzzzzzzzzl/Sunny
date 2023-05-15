@@ -12,7 +12,6 @@ public class playerActions : MonoBehaviour
         {
             GetComponent<earthGenerator>().tileArr[(int)playerObj.transform.position.x][(int)playerObj.transform.position.z].player = false;
             playerObj.transform.position += new Vector3(arr[0], 0, arr[1]);
-            // GetComponent<playerCharacter>().facing = new int[] { (int)playerObj.transform.position.x + arr[0], (int)playerObj.transform.position.z + arr[1] };
             GetComponent<earthGenerator>().tileArr[(int)playerObj.transform.position.x][(int)playerObj.transform.position.z].player = true;
         }
     }

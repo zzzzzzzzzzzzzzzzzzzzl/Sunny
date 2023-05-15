@@ -38,14 +38,10 @@ public class earthGenerator : MonoBehaviour
         {
             arr[i] = new int[size];
         }
-        for (int i = 0; i < 1000; i++)
-        {
+        arr = genMap(50, 50, arr, 0, 100);
+        arr[50][50] = 1;
 
-            recursion = 0;
-            arr = genMap(50, 50, arr);
-        }
-
-        return genMap(50, 50, arr);
+        return arr;
 
     }
     private int[][] edgeUp(int[][] arr)
@@ -66,23 +62,21 @@ public class earthGenerator : MonoBehaviour
     }
 
     private int recursion = 0;
-    private int[][] genMap(int x, int z, int[][] arr)
+    private int[][] genMap(int x, int z, int[][] arr, int recursion, int size)
     {
-        recursion++;
-        if (recursion > 10)
+
+        if (recursion > size)
         {
             return arr;
         }
         int[][] direction = { new int[] { 1 + x, z }, new int[] { -1 + x, z }, new int[] { x, 1 + z }, new int[] { x, -1 + z } };
         for (int j = 0; j < 10; j++)
         {
-
             int[] addToMap = direction[Random.Range(0, 4)];
-            if (!(arr[addToMap[0]][addToMap[1]] == 1))
-            {
-                arr[addToMap[0]][addToMap[1]] = 1;
-                return genMap(addToMap[0], addToMap[1], arr);
-            }
+            recursion++;
+            arr[addToMap[0]][addToMap[1]] = 1;
+            return genMap(addToMap[0], addToMap[1], arr, recursion, size);
+
         }
 
         return arr;

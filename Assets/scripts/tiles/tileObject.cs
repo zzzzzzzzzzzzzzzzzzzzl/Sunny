@@ -17,7 +17,7 @@ public class tile
     {
         mesh = Mesh;
         type = Type;
-        mesh.GetComponent<Renderer>().material = (Material)Resources.Load($"{type}");
+        mesh.GetComponent<Renderer>().material = (Material)Resources.Load($"tileMaterials/{type}");
         Tuple<string, bool, bool, bool, GameObject> typeData = tileDictionary.tileData[Type];
         type = typeData.Item1;
         walkable = typeData.Item2;

@@ -15,7 +15,8 @@ public class itemDictionary : MonoBehaviour
     public static Dictionary<string, Tuple<string>> itemData =
      new Dictionary<string, Tuple<string>> {
         { "karp", new Tuple<string>("karp") },
-        { "salmon", new Tuple<string>("salmon") }
+        { "salmon", new Tuple<string>("salmon") },
+        { "good rod", new Tuple<string>("good rod") }
       };
 }
 
