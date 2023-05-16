@@ -81,14 +81,6 @@ public class earthGenerator : MonoBehaviour
 
         return arr;
     }
-
-
-
-
-
-
-    // }
-
     public GameObject newPlane(int x, int z)
     {
         GameObject plane = new GameObject("Plane");
@@ -121,6 +113,7 @@ public class earthGenerator : MonoBehaviour
         mesh.RecalculateBounds();
         meshFilter.mesh = mesh;
         plane.transform.position = new Vector3(x, 0, z);
+        plane.transform.SetParent(parent.transform);
 
         return plane;
     }

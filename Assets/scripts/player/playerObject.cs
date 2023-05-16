@@ -7,8 +7,16 @@ public class playerObject : MonoBehaviour
     public Inventory inventory = new Inventory(30);
     public void Start()
     {
-        Debug.Log("player has itmes good job");
         addItem(new item("good rod"));
+        addItem(new item("karp"));
+        addItem(new item("karp"));
+        addItem(new item("karp"));
+        addItem(new item("karp"));
+        addItem(new item("karp"));
+        addItem(new item("salmon"));
+        addItem(new item("salmon"));
+        addItem(new item("salmon"));
+
     }
     public void addItem(item item)
     {
