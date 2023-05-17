@@ -18,6 +18,12 @@ public class tile
         mesh = Mesh;
         type = Type;
         mesh.GetComponent<Renderer>().material = (Material)Resources.Load($"tileMaterials/{type}");
+        if (type == "water")
+        {
+            Animator animator = mesh.AddComponent<Animator>();
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load($"tileMaterials/{type}Animator");
+        }
+
         Tuple<string, bool, bool, bool, GameObject> typeData = tileDictionary.tileData[Type];
         type = typeData.Item1;
         walkable = typeData.Item2;
@@ -26,12 +32,6 @@ public class tile
 }
 public class tileDictionary : MonoBehaviour
 {
-    //we should put our game object templates here
-
-    //Tuple<string,bool,bool,bool>
-    //Tuple<type,walkable,fishable,player>
-
-
     public static Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> tileData =
      new Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> {
         { "dirt", new Tuple<string, bool, bool,bool,GameObject>("dirt", true, false,false,null) },

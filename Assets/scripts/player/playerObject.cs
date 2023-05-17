@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class playerObject : MonoBehaviour
 {
-    public float speed = 0.01f;
+    public float speed = 0.1f;
     public GameObject script;
     public GameObject camera;
     public Inventory inventory = new Inventory(30);
+    public tile facing;
     tile[][] tileArr;
     public void Start()
     {
@@ -39,13 +40,14 @@ public class playerObject : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0f, rotation, 0f);
 
-
+        Debug.Log(speed);
         if (tileArr[(int)((arr[0] * speed) + transform.position.x + .5f)][+(int)((arr[1] * speed) + transform.position.z + .5f)].walkable == true)
         {
             tileArr[(int)transform.position.x][(int)transform.position.z].player = false;
             transform.position += new Vector3(arr[0] * speed, 0, arr[1] * speed);
             camera.transform.position += new Vector3(arr[0] * speed, 0, arr[1] * speed);
             tileArr[(int)transform.position.x][(int)transform.position.z].player = true;
+            facing = tileArr[(int)((arr[0] * speed) + transform.position.x + 1f)][+(int)((arr[1] * speed) + transform.position.z + 1f)];
         }
     }
 
