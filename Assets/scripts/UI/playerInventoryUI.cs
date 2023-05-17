@@ -74,7 +74,6 @@ public class playerInventoryUI : MonoBehaviour
     }
     public void movehotbarCursor(int direction)
     {
-        Debug.Log(selectedHotbarSlot);
         selectedHotbarSlot += direction;
         if (selectedHotbarSlot < 0)
         {

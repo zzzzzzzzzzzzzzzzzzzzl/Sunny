@@ -11,11 +11,11 @@ public class playerActions : MonoBehaviour
     public void movePlayer(int[] arr, float rotation)
     {
         playerObj.transform.rotation = Quaternion.Euler(0f, rotation, 0f);
-        if (GetComponent<earthGenerator>().tileArr[arr[0] + (int)(playerObj.transform.position.x)][arr[1] + (int)(playerObj.transform.position.z)].walkable == true)
+        if (GetComponent<earthGenerator>().tileArr[arr[0] + (int)(playerObj.transform.position.x + .5f)][arr[1] + (int)(playerObj.transform.position.z + .5f)].walkable == true)
         {
             GetComponent<earthGenerator>().tileArr[(int)playerObj.transform.position.x][(int)playerObj.transform.position.z].player = false;
-            playerObj.transform.position += new Vector3(arr[0], 0, arr[1]);
-            camera.transform.position += new Vector3(arr[0], 0, arr[1]);
+            playerObj.transform.position += new Vector3(arr[0] * .1f, 0, arr[1] * .1f);
+            camera.transform.position += new Vector3(arr[0] * .1f, 0, arr[1] * .1f);
             GetComponent<earthGenerator>().tileArr[(int)playerObj.transform.position.x][(int)playerObj.transform.position.z].player = true;
         }
     }

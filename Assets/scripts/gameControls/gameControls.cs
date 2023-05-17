@@ -17,32 +17,38 @@ public class gameControls : MonoBehaviour
     }
     private void playerMovement()
     {
-        if (Input.GetKeyUp(KeyCode.W))
+        int[] moveArr = new int[] { 0, 0 };
+        if (Input.GetKey(KeyCode.W))
         {
-            int[] arr = { 1, 1 };
-            GetComponent<playerActions>().movePlayer(arr, 0f);
+
+            moveArr[0] += 1;
+            moveArr[1] += 1;
         }
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKey(KeyCode.A))
         {
-            int[] arr = { 1, -1 };
-            GetComponent<playerActions>().movePlayer(arr, 90f);
+
+            moveArr[0] += -1;
+            moveArr[1] += 1;
         }
-        if (Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
-            int[] arr = { -1, -1 };
-            GetComponent<playerActions>().movePlayer(arr, 180f);
+
+            moveArr[0] += -1;
+            moveArr[1] += -1;
         }
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
         {
-            int[] arr = { -1, 1 };
-            GetComponent<playerActions>().movePlayer(arr, 270f);
+
+            moveArr[0] += 1;
+            moveArr[1] += -1;
         }
+        player.GetComponent<playerObject>().movePlayer(moveArr, 0f);
     }
     private void UIControls()
     {
+        GetComponent<drawGrid>().drawMap();
         if (Input.GetKeyUp(KeyCode.M))
         {
-            GetComponent<drawGrid>().drawMap();
             GetComponent<functionsUI>().toggleUI("mapUI");
         }
         if (Input.GetKeyUp(KeyCode.E))
@@ -74,4 +80,5 @@ public class gameControls : MonoBehaviour
             GetComponent<playerInventoryUI>().movehotbarCursor(-1);
         }
     }
+
 }

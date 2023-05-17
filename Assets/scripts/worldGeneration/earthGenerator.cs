@@ -40,26 +40,35 @@ public class earthGenerator : MonoBehaviour
         }
         arr = genMap(50, 50, arr, 0, 100);
         arr[50][50] = 1;
-
+        arr = edgeUp(arr);
         return arr;
 
     }
     private int[][] edgeUp(int[][] arr)
     {
+        List<int[]> arrList = new List<int[]>();
         for (int i = 0; i < 100; i++)
         {
             for (int j = 0; j < 100; j++)
             {
-                if (arr[i][j] == 1) { }
+                int[][] direction = { new int[] { 1 + i, j }, new int[] { -1 + i, j }, new int[] { i, 1 + j }, new int[] { i, -1 + j } };
+
+                if (arr[i][j] == 1)
+                {
+                    foreach (int[] k in direction)
+                    {
+                        arrList.Add(k);
+                    }
+                }
             }
+        }
+        foreach (int[] i in arrList)
+        {
+            arr[i[0]][i[1]] = 1;
         }
         return arr;
     }
-    private bool checkNeighbours(int[][] arr)
-    {
 
-        return false;
-    }
 
     private int recursion = 0;
     private int[][] genMap(int x, int z, int[][] arr, int recursion, int size)
