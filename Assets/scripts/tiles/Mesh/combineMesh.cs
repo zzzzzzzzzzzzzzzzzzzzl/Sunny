@@ -23,4 +23,6 @@ public class combineMesh : MonoBehaviour
         mesh.CombineMeshes(combine);
         targetMeshFilter.mesh = mesh;
     }
+
+
 }

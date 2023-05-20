@@ -7,36 +7,57 @@ public class tile
 {
 
 
-    public string type;
+    public string tileType;
     public bool walkable;
     public bool fishable;
     public bool player;
     public GameObject mesh;
 
-    public tile(string Type, GameObject Mesh)
+    public tile(string tileType, GameObject Mesh)
     {
-        mesh = Mesh;
-        type = Type;
-        mesh.GetComponent<Renderer>().material = (Material)Resources.Load($"tileMaterials/{type}");
-        if (type == "water")
+        this.mesh = Mesh;
+        this.tileType = tileType;
+        this.mesh.GetComponent<Renderer>().material = (Material)Resources.Load($"tileMaterials/{tileType}");
+        if (tileType == "water")
         {
             Animator animator = mesh.AddComponent<Animator>();
-            animator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load($"tileMaterials/{type}Animator");
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load($"tileMaterials/{tileType}Animator");
         }
-
-        Tuple<string, bool, bool, bool, GameObject> typeData = tileDictionary.tileData[Type];
-        type = typeData.Item1;
-        walkable = typeData.Item2;
-        fishable = typeData.Item3;
+        this.mesh.SetActive(false);
+        TileData Data = tileDictionary.Data[tileType];
+        this.tileType = Data.tileType;
+        this.walkable = Data.walkable;
+        this.fishable = Data.fishable;
     }
 }
-public class tileDictionary : MonoBehaviour
+
+
+public class TileData
 {
-    public static Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> tileData =
-     new Dictionary<string, Tuple<string, bool, bool, bool, GameObject>> {
-        { "dirt", new Tuple<string, bool, bool,bool,GameObject>("dirt", true, false,false,null) },
-        { "water", new Tuple<string, bool, bool,bool,GameObject>("water", false, true,false,null) }
-      };
+    public string tileType;
+    public bool walkable;
+    public bool fishable;
+    public bool player;
+    public GameObject tileGameObject;
+    public bool animation;
+
+    public TileData(string tileType, bool walkable, bool fishable, bool player, GameObject tileGameObject, bool animation)
+    {
+        this.tileType = tileType;
+        this.walkable = walkable;
+        this.fishable = fishable;
+        this.player = player;
+        this.tileGameObject = tileGameObject;
+        this.animation = animation;
+    }
+}
+public static class tileDictionary
+{
+    public static Dictionary<string, TileData> Data = new Dictionary<string, TileData>
+{
+    { "dirt", new TileData("dirt", true, false, false, null, false) },
+    { "water", new TileData("water", false, true, false, null, true) }
+};
 }
 
 

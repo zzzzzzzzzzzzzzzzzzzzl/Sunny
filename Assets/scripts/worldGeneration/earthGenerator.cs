@@ -6,6 +6,12 @@ public class earthGenerator : MonoBehaviour
 
     public GameObject parent;
     public GameObject player;
+    public GameObject scriptManager;
+    public GameObject mesh1;
+    public GameObject mesh2;
+    public GameObject mesh3;
+
+
 
     public tile[][] tileArr = new tile[100][];
 
@@ -30,6 +36,25 @@ public class earthGenerator : MonoBehaviour
                 }
             }
         }
+
+        GameObject water = combineMeshs("water");
+        GameObject dirt = combineMeshs("dirt");
+
+    }
+    private List<MeshFilter> sortTile(string tileType)
+    {
+        List<MeshFilter> list = new List<MeshFilter>();
+        foreach (tile[] i in tileArr)
+        {
+            foreach (tile j in i)
+            {
+                if (j.tileType == tileType)
+                {
+                    list.Add(j.mesh.GetComponent<MeshFilter>());
+                }
+            }
+        }
+        return list;
     }
     private int[][] genArr(int size)
     {
@@ -125,5 +150,48 @@ public class earthGenerator : MonoBehaviour
         plane.transform.SetParent(parent.transform);
 
         return plane;
+    }
+
+    private GameObject combineMeshs(string tileType)
+    {
+
+        List<MeshFilter> sourceMeshFilters = new List<MeshFilter>();
+        foreach (tile[] i in tileArr)
+        {
+            foreach (tile j in i)
+            {
+                if (j.tileType == tileType)
+                {
+
+                    sourceMeshFilters.Add(j.mesh.GetComponent<MeshFilter>());
+                }
+            }
+        }
+
+        CombineInstance[] combine = new CombineInstance[sourceMeshFilters.Count];
+        Debug.Log(sourceMeshFilters.Count);
+        for (var i = 0; i < sourceMeshFilters.Count; i++)
+        {
+            combine[i].mesh = sourceMeshFilters[i].sharedMesh;
+            combine[i].transform = sourceMeshFilters[i].transform.localToWorldMatrix;
+        }
+
+        var mesh = new Mesh();
+        mesh.CombineMeshes(combine);
+
+
+        GameObject newGameobject = new GameObject();
+        MeshFilter targetMeshFilter = newGameobject.AddComponent<MeshFilter>();
+        Debug.Log(targetMeshFilter);
+        targetMeshFilter.mesh = mesh;
+        newGameobject.name = $"{tileType}CombinedMesh";
+        newGameobject.AddComponent<MeshRenderer>();
+        newGameobject.GetComponent<MeshRenderer>().material = (Material)Resources.Load($"tileMaterials/{tileType}");
+        if (tileDictionary.Data[tileType].animation)
+        {
+            Animator animator = newGameobject.AddComponent<Animator>();
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load($"tileMaterials/{tileType}Animator");
+        }
+        return newGameobject;
     }
 }

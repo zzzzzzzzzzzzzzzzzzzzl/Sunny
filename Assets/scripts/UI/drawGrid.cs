@@ -21,11 +21,11 @@ public class drawGrid : MonoBehaviour
         {
             for (int j = 0; j < arr[i].Length; j++)
             {
-                if (arr[i][j].type == "dirt")
+                if (arr[i][j].tileType == "dirt")
                 {
                     mapTexture.SetPixel(i, j, new Color(Random.Range(0f, .3f), Random.Range(.0f, .2f) + .6f, Random.Range(.0f, .2f) + .1f));
                 }
-                if (arr[i][j].type == "water")
+                if (arr[i][j].tileType == "water")
                 {
                     mapTexture.SetPixel(i, j, new Color(Random.Range(0f, .1f), Random.Range(.0f, .1f) + .3f, Random.Range(.0f, .1f) + .5f));
                 }
@@ -44,7 +44,7 @@ public class drawGrid : MonoBehaviour
         parent.GetComponent<Image>().sprite = sprite;
         parent.transform.localScale = new Vector3(pixelSize, pixelSize, 1);
     }
-    public void updateMap()
+    public void updateMap()//????
     {
 
     }

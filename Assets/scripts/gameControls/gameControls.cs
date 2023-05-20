@@ -6,6 +6,11 @@ public class gameControls : MonoBehaviour
 {
 
     public GameObject player;
+    private Animator playerAnimator;
+    private void Start()
+    {
+
+    }
     private void Update()
     {
         playerMovement();
@@ -42,13 +47,19 @@ public class gameControls : MonoBehaviour
             moveArr[0] += 1;
             moveArr[1] += -1;
         }
-        player.GetComponent<playerObject>().movePlayer(moveArr, 0f);
+        if (!(moveArr[0] == 0 && moveArr[1] == 0))
+        {
+
+            player.GetComponent<playerObject>().movePlayer(moveArr, 0f);
+        }
+
+
     }
     private void UIControls()
     {
-        GetComponent<drawGrid>().drawMap();
         if (Input.GetKeyUp(KeyCode.M))
         {
+            GetComponent<drawGrid>().drawMap();//
             GetComponent<functionsUI>().toggleUI("mapUI");
         }
         if (Input.GetKeyUp(KeyCode.E))
@@ -61,7 +72,6 @@ public class gameControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("here");
             playerObject test = player.GetComponent<playerObject>();
             fishingRod a = new fishingRod();
             test.addItem(a.catchFish());

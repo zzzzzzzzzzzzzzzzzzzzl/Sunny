@@ -20,7 +20,6 @@ public class functionsUI : MonoBehaviour
         open = openUI;
         foreach (string key in UIDict.Keys)
         {
-            Debug.Log(key);
             if (open == key)
             {
                 UIDict[key].SetActive(!UIDict[key].activeSelf);
